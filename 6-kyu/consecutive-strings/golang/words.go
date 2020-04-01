@@ -1,6 +1,9 @@
 package words
 
-import "sort"
+import (
+	"sort"
+	"strings"
+)
 
 type byLength []string
 
@@ -16,11 +19,28 @@ func (b byLength) Swap(i, j int) {
 	b[i], b[j] = b[j], b[i]
 }
 
+// interesting solution
+func longestConsecAlt(strarr []string, k int) string {
+	var buffer string
+	var largest string
+
+	for i := 0; i <= len(strarr)-k; i++ {
+		buffer = strings.Join(strarr[i : i+k][:], "")
+		if len(buffer) > len(largest) {
+			largest = buffer
+		}
+	}
+	return largest
+}
 func LongestConsec(words []string, by int) string {
 	size := len(words)
 	if by < 1 || size == 0 || by > size {
 		return ""
 	}
+
+	// Interesting solution, crashes on bad indices though
+	return longestConsecAlt(words, by)
+
 	combined := combine(words, by)
 	sort.Sort(sort.Reverse(byLength(combined)))
 
