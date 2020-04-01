@@ -9,13 +9,13 @@ type TestRunner struct {
 	t *testing.T
 }
 
-func (r *TestRunner) assertHello(wanted string, input string) {
-	got := hello(input)
-	if got != wanted {
-		r.t.Errorf("FAIL: '%s', got: '%s'", wanted, got)
+func (r *TestRunner) assertLongestConsec(want string, words []string, by int) {
+	got := LongestConsec(words, by)
+	if got != want {
+		r.t.Errorf("FAIL: want: '%s', got: '%s'", want, got)
 		return
 	}
-	r.t.Logf("PASS: %s", wanted)
+	r.t.Logf("PASS: '%s'", want)
 }
 
 func (r *TestRunner) assertCombine(message string, want []string, words []string, by int) {
@@ -27,12 +27,38 @@ func (r *TestRunner) assertCombine(message string, want []string, words []string
 	r.t.Logf("PASS: %s", message)
 }
 
-func TestHello(t *testing.T) {
-	r := &TestRunner{t}
+// noinspection SpellCheckingInspection
+func TestLongestConsec(t *testing.T) {
+	r := &TestRunner{t: t}
 
-	r.assertHello("Hello Ben", "Ben")
-	r.assertHello("Hello Ewan", "Ewan")
-	r.assertHello("Hello Dorian", "Dorian")
+	r.assertLongestConsec("abigailtheta",
+		[]string{"zone", "abigail", "theta", "form", "libe", "zas"},
+		2)
+
+	r.assertLongestConsec("oocccffuucccjjjkkkjyyyeehh",
+		[]string{"ejjjjmmtthh", "zxxuueeg", "aanlljrrrxx", "dqqqaaabbb", "oocccffuucccjjjkkkjyyyeehh"},
+		1)
+
+	r.assertLongestConsec("", []string{}, 3)
+
+	r.assertLongestConsec("wkppqsztdkmvcuwvereiupccauycnjutlvvweqilsfytihvrzlaodfixoyxvyuyvgpck",
+		[]string{"itvayloxrp", "wkppqsztdkmvcuwvereiupccauycnjutlv", "vweqilsfytihvrzlaodfixoyxvyuyvgpck"},
+		2)
+
+	r.assertLongestConsec("wlwsasphmxxowiaxujylentrklctozmymu",
+		[]string{"wlwsasphmxx", "owiaxujylentrklctozmymu", "wpgozvxxiu"}, 2)
+
+	r.assertLongestConsec("",
+		[]string{"zone", "abigail", "theta", "form", "libe", "zas"}, -2)
+
+	r.assertLongestConsec("ixoyx3452zzzzzzzzzzzz",
+		[]string{"it", "wkppv", "ixoyx", "3452", "zzzzzzzzzzzz"}, 3)
+
+	r.assertLongestConsec("",
+		[]string{"it", "wkppv", "ixoyx", "3452", "zzzzzzzzzzzz"}, 15)
+
+	r.assertLongestConsec("",
+		[]string{"it", "wkppv", "ixoyx", "3452", "zzzzzzzzzzzz"}, 0)
 }
 
 func TestCombine(t *testing.T) {
