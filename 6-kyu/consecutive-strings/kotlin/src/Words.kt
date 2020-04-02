@@ -2,6 +2,11 @@ fun message(): String {
     return "Have a fine day!"
 }
 
+fun longestConsec(words: Array<String>, n: Int): String {
+return "hello"
+}
+
+
 fun main() {
 
 //    val names = Array<String>(3) { "Benjamin"; "Pénélope", "Ewan", "Dorian"}
@@ -19,10 +24,12 @@ fun main() {
     val windows = sequence.windowed(size = 5, step = 1)
     println(windows.take(4).toList())
 
+    val combined = listOf("Benjamin", "Pénélope", "Ewan", "Dorian")
+        .windowed(size = 2)
+        .toList()
+
     println(
-        listOf("Benjamin", "Pénélope", "Ewan", "Dorian")
-            .windowed(size = 2)
-            .toList()
+        combined
     )
 
     println(

@@ -25,7 +25,7 @@ func longestConsecAlt(strarr []string, k int) string {
 	var largest string
 
 	for i := 0; i <= len(strarr)-k; i++ {
-		buffer = strings.Join(strarr[i : i+k][:], "")
+		buffer = strings.Join(strarr[i : i+k], "")
 		if len(buffer) > len(largest) {
 			largest = buffer
 		}
