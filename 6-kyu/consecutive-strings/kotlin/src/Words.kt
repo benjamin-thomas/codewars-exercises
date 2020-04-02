@@ -1,9 +1,23 @@
+import java.lang.StringBuilder
+
 fun message(): String {
     return "Have a fine day!"
 }
 
 fun longestConsec(words: Array<String>, n: Int): String {
-return "hello"
+    var largest = ""
+
+    for (i in 0..words.size - n step 1) {
+        var builder = StringBuilder()
+        for (j in i until (i + n)) {
+            builder.append(words[j])
+        }
+
+        if (builder.length > largest.length) {
+            largest = builder.toString()
+        }
+    }
+    return largest
 }
 
 
